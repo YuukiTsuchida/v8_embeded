@@ -2,8 +2,10 @@
 
 #include <libplatform/libplatform.h>
 #include <v8.h>
+#include <memory>
 #include <string_view>
 #include <vector>
+#include "javascript.hpp"
 
 namespace engine {
 
@@ -23,6 +25,7 @@ class engine {
   v8::Isolate* isolate_;
   std::unique_ptr<v8::Platform> platform_;
   v8::Isolate::CreateParams create_params_;
+  std::unique_ptr<javascript> javascript_;
 };
 
 }  // namespace engine
