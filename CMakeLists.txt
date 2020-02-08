@@ -12,7 +12,7 @@ set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 set(CMAKE_BUILD_TYPE Debug)
 
 if (MSVC)
-set(CMAKE_CXX_FLAGS_DEBUG "${CMAKE_CXX_FLAGS_DEBUG} /EHa /Od /Gz /FA /MDd /std:c++17 /W3")
+set(CMAKE_CXX_FLAGS_DEBUG "${CMAKE_CXX_FLAGS_DEBUG} /EHa /Od /Z7 /Gz /FA /MDd /std:c++17 /W3")
 set(CMAKE_CXX_FLAGS_RELEASE "${CMAKE_CXX_FLAGS_RELEASE} /EHa /O1 /Gz /MD /std:c++17")
 else()
 set(CMAKE_CXX_FLAGS_DEBUG "${CMAKE_CXX_FLAGS_DEBUG} -g0 -O0 -std=c++17")
@@ -48,7 +48,7 @@ target_link_libraries(javascript_engine icui18n icuuc v8 v8_libbase v8_libplatfo
 endif()
 
 if (MSVC)
-    target_compile_options(javascript_engine PUBLIC /Z7 -DEXE -DWIN)
+    target_compile_options(javascript_engine PUBLIC -DEXE -DWIN)
 else()
     target_compile_options(javascript_engine PUBLIC -DSTACK_TRACE -DEXE -DBOOST_STACKTRACE_USE_ADDR2LINE -D_GNU_SOURCE -DOSX)
 endif()
