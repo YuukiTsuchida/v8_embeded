@@ -7,7 +7,10 @@ javascript::javascript(v8::Isolate* isolate)
   bind_object(isolate);
 }
 
-void javascript::dispose(v8::Isolate* isolate) { global_context_.Reset(); }
+void javascript::dispose(v8::Isolate* isolate) { 
+  console_.reset();
+  global_context_.Reset(); 
+}
 
 void javascript::run_code(v8::Isolate* isolate, std::string_view src) {
   runner js_runner(isolate);
