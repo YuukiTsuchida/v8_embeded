@@ -10,8 +10,9 @@
 
 namespace engine::utils {
 
-static inline std::string to_string(const v8::String::Utf8Value& value) {
-  return *value ? std::string(*value) : "string conversion failed";
+static inline std::string to_string(v8::Isolate* isolate, const v8::Local<v8::Value> value){
+    v8::String::Utf8Value utf8_string(isolate, value);
+  return *utf8_string ? std::string(*utf8_string) : "string conversion failed";
 }
 
 static inline v8::Local<v8::String> to_v8_string(v8::Isolate* isolate,
@@ -24,10 +25,9 @@ static inline v8::Local<v8::String> to_v8_string(v8::Isolate* isolate,
 static inline void exception_log(v8::Isolate* isolate,
                                  const v8::TryCatch& try_catch) {
   auto message = try_catch.Message();
-  v8::String::Utf8Value exception_str(isolate, message->Get());
   auto line = message->GetLineNumber(isolate->GetCurrentContext()).FromJust();
   auto log_str =
-      boost::format("%1% [line %2%]") % to_string(exception_str) % line;
+      boost::format("%1% [line %2%]") % to_string(isolate, message->Get()) % line;
   std::cerr << log_str.str() << std::endl;
 }
 
