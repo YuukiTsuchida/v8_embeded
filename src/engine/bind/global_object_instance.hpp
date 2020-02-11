@@ -10,8 +10,8 @@ template <class Type>
 class global_object_instance {
  public:
   template <class... Args>
-  global_object_instance(v8::Isolate* isolate, v8::Local<v8::Object> object,
-                         Args... args)
+  explicit global_object_instance(v8::Isolate* isolate, v8::Local<v8::Object> object,
+                         const Args&... args)
       : object_(v8::Global<v8::Object>(isolate, object)), instance_(args...) {
     object->SetInternalField(0, v8::External::New(isolate, &instance_));
   }
