@@ -10,7 +10,7 @@ endif()
 
 set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 
-project(javascript_engine)
+# project(javascript_engine)
 
 if (MSVC)
 set(CMAKE_CXX_FLAGS_DEBUG "${CMAKE_CXX_FLAGS_DEBUG} /EHa /Od /Gz /FA /MDd /std:c++17 /W4 -Wno-unused-parameter")
