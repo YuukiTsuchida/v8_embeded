@@ -22,15 +22,15 @@ jobs:
     # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
     - uses: actions/checkout@v2
 
-- name: Setup Ninja
-  uses: ashutoshvarma/setup-ninja@v1
-  with:
-    # Ninja version. Make sure given ninja version exists in ninja github release
-    version: # default is 1.10.0
-    # Folder where ninja binary will be downloaded
-    dest: # optional, default is ninja_bin
-    # Override default platform detection logic. Accepted values are [mac, linux, win]
-    platform: # optional
+    - name: Setup Ninja
+      uses: ashutoshvarma/setup-ninja@v1
+      with:
+        # Ninja version. Make sure given ninja version exists in ninja github release
+        version: # default is 1.10.0
+        # Folder where ninja binary will be downloaded
+        dest: # optional, default is ninja_bin
+        # Override default platform detection logic. Accepted values are [mac, linux, win]
+        platform: # optional
     
     # Runs a single command using the runners shell
     - name: Run a one-line script
