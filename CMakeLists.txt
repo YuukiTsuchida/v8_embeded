@@ -1,8 +1,8 @@
 cmake_minimum_required(VERSION 3.0.0)
 
 if (MSVC)
-# set(CMAKE_C_COMPILER "clang-cl.exe")
-# set(CMAKE_CXX_COMPILER "clang-cl.exe")
+set(CMAKE_C_COMPILER "clang-cl.exe")
+set(CMAKE_CXX_COMPILER "clang-cl.exe")
 else()
 set(CMAKE_C_COMPILER clang)
 set(CMAKE_CXX_COMPILER clang++)
