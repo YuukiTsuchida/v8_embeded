@@ -33,10 +33,10 @@ jobs:
         args: install llvm
     - name: setup clang
       run: |
-        cmake -DCMAKE_C_COMPILER="C:/Program Files/LLVM/bin/clang-cl.exe" -DCMAKE_CXX_COMPILER="C:/Program Files/LLVM/bin/clang-cl.exe" -DCMAKE_BUILD_TYPE:STRING=Release -G Ninja ./
+        $env:LIB = "C:\Program Files (x86)\Windows Kits\10\Lib\10.0.17763.1\um\x64;C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\VC\Tools\MSVC\14.16.27023\lib\onecore\x64;C:\Program Files (x86)\Windows Kits\10\Lib\10.0.17763.1\ucrt\x64"
+        cmake -DCMAKE_C_COMPILER="C:/Program Files/LLVM/bin/clang-cl.exe" -DCMAKE_CXX_COMPILER="C:/Program Files/LLVM/bin/clang-cl.exe" -DCMAKE_BUILD_TYPE:STRING=Release -G Ninja ../ "-DCMAKE_LINKER:FILEPATH=C:/Program Files (x86)/Microsoft Visual Studio/2017/Community/VC/Tools/MSVC/14.16.27023/bin/Hostx64/x64/link.exe" "-DCMAKE_MT:FILEPATH=C:/Program Files (x86)/Windows Kits/10/bin/10.0.17763.1/x64/mt.exe" "-DCMAKE_RC_COMPILER:FILEPATH=C:/Program Files (x86)/Windows Kits/10/bin/10.0.17763.1/x64/rc.exe" "-DCMAKE_CXX_STANDARD_LIBRARIES:STRING=kernel32.lib user32.lib gdi32.lib winspool.lib shell32.lib ole32.lib oleaut32.lib uuid.lib comdlg32.lib advapi32.lib" "-DCMAKE_EXPORT_COMPILE_COMMANDS:BOOL=TRUE"
         ninja javascript_engine
-    - name: path Checks
-      run: ls "C:/Program Files (x86)/Microsoft Visual Studio/2017/Community/VC/Tools/MSVC"
+
     # - name: Setup Ninja
     #   uses: ashutoshvarma/setup-ninja@v1
     #   with:
