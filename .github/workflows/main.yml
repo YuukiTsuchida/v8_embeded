@@ -33,7 +33,7 @@ jobs:
         args: install llvm
     - name: setup clang
       run: |
-        cmake -G Ninja ./
+        cmake --debug-output --trace -G Ninja ./
         ninja -v javascript_engine
 
     # $env:LIB = "C:\Program Files (x86)\Windows Kits\10\Lib\10.0.17763.1\um\x64;C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\VC\Tools\MSVC\14.16.27023\lib\onecore\x64;C:\Program Files (x86)\Windows Kits\10\Lib\10.0.17763.1\ucrt\x64"
