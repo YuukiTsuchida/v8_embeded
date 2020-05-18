@@ -35,9 +35,11 @@ jobs:
         Invoke-Expression (New-Object System.Net.WebClient).DownloadString('https://get.scoop.sh')
         scoop install llvm --global
         #scoop install ninja --global
-          
-    # Runs a set of commands using the runners shell
-    - name: ninja build
-      run: |
         cmake -DMSVC=1 -DCMAKE_BUILD_TYPE:STRING=Release -DCMAKE_C_COMPILER="clang-cl" -DCMAKE_CXX_COMPILER="clang-cl" -G Ninja ./
         ninja javascript_engine
+          
+    # Runs a set of commands using the runners shell
+    #- name: ninja build
+      #run: |
+        #cmake -DMSVC=1 -DCMAKE_BUILD_TYPE:STRING=Release -DCMAKE_C_COMPILER="clang-cl" -DCMAKE_CXX_COMPILER="clang-cl" -G Ninja ./
+        #ninja javascript_engine
