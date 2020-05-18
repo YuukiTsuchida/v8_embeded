@@ -33,7 +33,8 @@ jobs:
 
     # Runs a single command using the runners shell
     - name: Run a one-line script
-      run:  gcm clang-cl
+      run:  where clang-cl
+      shell: cmd
 
     # Runs a set of commands using the runners shell
     - name: ninja build
