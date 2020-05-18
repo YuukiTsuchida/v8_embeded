@@ -22,21 +22,36 @@ jobs:
     # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
     - uses: actions/checkout@v2
     - name: Setup Ninja
-      uses: ashutoshvarma/setup-ninja@v1
+      uses: crazy-max/ghaction-chocolatey@v1.2.2
       with:
-        # Ninja version. Make sure given ninja version exists in ninja github release
-        version: 1.10.0 # default is 1.10.0
-        # Folder where ninja binary will be downloaded
-        # dest: # optional, default is ninja_bin
-        # Override default platform detection logic. Accepted values are [mac, linux, win]
-        platform: win # optional
+        # Arguments to pass to Chocolatey
+        args: install ninja
+    - name: Setup clang
+      uses: crazy-max/ghaction-chocolatey@v1.2.2
+      with:
+        # Arguments to pass to Chocolatey
+        args: install llvm
     - name: setup clang
       run: |
-        Invoke-Expression (New-Object System.Net.WebClient).DownloadString('https://get.scoop.sh')
-        scoop install llvm --global
-        #scoop install ninja --global
         cmake -DMSVC=1 -DCMAKE_BUILD_TYPE:STRING=Release -G Ninja ./
         ninja javascript_engine
+
+    # - name: Setup Ninja
+    #   uses: ashutoshvarma/setup-ninja@v1
+    #   with:
+    #     # Ninja version. Make sure given ninja version exists in ninja github release
+    #     version: 1.10.0 # default is 1.10.0
+    #     # Folder where ninja binary will be downloaded
+    #     # dest: # optional, default is ninja_bin
+    #     # Override default platform detection logic. Accepted values are [mac, linux, win]
+    #     platform: win # optional
+    # - name: setup clang
+    #   run: |
+    #     Invoke-Expression (New-Object System.Net.WebClient).DownloadString('https://get.scoop.sh')
+    #     scoop install llvm --global
+    #     #scoop install ninja --global
+    #     cmake -DMSVC=1 -DCMAKE_BUILD_TYPE:STRING=Release -G Ninja ./
+    #     ninja javascript_engine
           
     # Runs a set of commands using the runners shell
     #- name: ninja build
