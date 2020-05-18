@@ -33,7 +33,7 @@ jobs:
         args: install llvm
     - name: setup clang
       run: |
-        cmake -DCMAKE_C_COMPILER="C:/Program Files/LLVM/bin/clang-cl" -DCMAKE_CXX_COMPILER="C:/Program Files/LLVM/bin/clang-cl" -DCMAKE_BUILD_TYPE:STRING=Release -G Ninja ./
+        cmake -DCMAKE_C_COMPILER="C:/Program Files/LLVM/bin/clang-cl.exe" -DCMAKE_CXX_COMPILER="C:/Program Files/LLVM/bin/clang-cl.exe" -DCMAKE_BUILD_TYPE:STRING=Release -G Ninja ./
         ninja javascript_engine
 
     # - name: Setup Ninja
