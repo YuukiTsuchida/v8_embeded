@@ -32,7 +32,8 @@ jobs:
         # Arguments to pass to Chocolatey
         args: install llvm
     - name: Set vers
-      run: "C:/Program Files (x86)/Microsoft Visual Studio/2017/Community/VC/Auxiliary/Build/vcvarsall.bat" x64
+      run: |
+        "C:/Program Files (x86)/Microsoft Visual Studio/2017/Community/VC/Auxiliary/Build/vcvarsall.bat" x64
       shell: cmd
     - name: setup clang
       run: |
