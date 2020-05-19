@@ -33,7 +33,7 @@ jobs:
         args: install llvm
     - name: Set vers
       run: |
-        "C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\VC\Auxiliary\Build\vcvars64.bat"
+        "C:\Program Files (x86)\Microsoft Visual Studio\2017\Enterprise\VC\Auxiliary\Build\vcvars64.bat"
       shell: cmd
     - name: setup clang
       run: |
