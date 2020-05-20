@@ -41,7 +41,7 @@ class runner {
   void bind_global_object(v8::Isolate* isolate, v8::Local<v8::Context> context,
                           Head head, Tail... tail) {
     head->bind(isolate, context);
-    bind(isolate, context, tail);
+    bind_global_object(isolate, context, tail...);
   }
 
   template <class Type>
