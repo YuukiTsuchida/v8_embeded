@@ -61,10 +61,7 @@ jobs:
     - name: Build (mac)
       if: runner.os == 'macOS'
       run: |
-        mkdir build
-        cd build
-        cmake -DCMAKE_BUILD_TYPE=Release -G Ninja ../
-        ninja script_engine
+        call build_win.bat
     - name: Upload a Build Artifact
       if: runner.os == 'macOS'
       uses: actions/upload-artifact@v2
