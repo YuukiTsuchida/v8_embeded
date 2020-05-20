@@ -37,17 +37,22 @@ link_directories(${V8LIB})
 
 file( GLOB_RECURSE SOURCES "${PROJECT_SOURCE_DIR}/src/*.cpp" )
 add_executable(javascript_engine ${SOURCES})
+add_library(script_engine SHARED ${SOURCES})
 
 if (MSVC)
 target_link_libraries(javascript_engine icui18n.dll.lib icuuc.dll.lib v8.dll.lib v8_libbase.dll.lib v8_libplatform.dll.lib)
+target_link_libraries(script_engine icui18n.dll.lib icuuc.dll.lib v8.dll.lib v8_libbase.dll.lib v8_libplatform.dll.lib)
 else()
 target_link_libraries(javascript_engine icui18n icuuc v8 v8_libbase v8_libplatform)
+target_link_libraries(script_engine icui18n icuuc v8 v8_libbase v8_libplatform)
 endif()
 
 if (MSVC)
     target_compile_options(javascript_engine PUBLIC -DEXE -DWIN)
+    target_compile_options(script_engine PUBLIC -DEXE -DWIN)
 else()
     target_compile_options(javascript_engine PUBLIC -DSTACK_TRACE -DEXE -DBOOST_STACKTRACE_USE_ADDR2LINE -D_GNU_SOURCE -DOSX)
+    target_compile_options(script_engine PUBLIC -DSTACK_TRACE -DEXE -DBOOST_STACKTRACE_USE_ADDR2LINE -D_GNU_SOURCE -DOSX)
 endif()
 
 if (MSVC)
