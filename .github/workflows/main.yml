@@ -36,25 +36,21 @@ jobs:
       with:
         # Arguments to pass to Chocolatey
         args: install llvm
-    - name: Set vers
-      if: runner.os == 'Windows'
-      run: |
-        "C:\Program Files (x86)\Microsoft Visual Studio\2017\Enterprise\VC\Auxiliary\Build\vcvars64.bat"
     - name: Build (Windows)
       if: runner.os == 'Windows'
       run: |
-        mkdir build
-        cd build
-        cmake -DCMAKE_C_COMPILER="C:/Program Files/LLVM/bin/clang-cl.exe" -DCMAKE_CXX_COMPILER="C:/Program Files/LLVM/bin/clang-cl.exe" -DCMAKE_BUILD_TYPE:STRING=Release -G Ninja ../ "-DCMAKE_LINKER:FILEPATH=C:/Program Files/LLVM/bin/lld-link.exe"
+        "C:\Program Files (x86)\Microsoft Visual Studio\2017\Enterprise\VC\Auxiliary\Build\vcvars64.bat"
+        cmake -DCMAKE_C_COMPILER="C:/Program Files/LLVM/bin/clang-cl.exe" -DCMAKE_CXX_COMPILER="C:/Program Files/LLVM/bin/clang-cl.exe" -DCMAKE_BUILD_TYPE:STRING=Release -G Ninja ./ "-DCMAKE_LINKER:FILEPATH=C:/Program Files/LLVM/bin/lld-link.exe"
         ninja script_engine
       shell: cmd
     - name: Upload a Build Artifact
+      if: runner.os == 'Windows'
       uses: actions/upload-artifact@v2
       with:
         # Artifact name
         name: win_dll # optional
         # A file, directory or wildcard pattern that describes what to upload
-        path: build\script_engine.dll
+        path: script_engine.dll
 
     - name: Install (mac)
       if: runner.os == 'macOS'
@@ -69,6 +65,14 @@ jobs:
         cd build
         cmake -DCMAKE_BUILD_TYPE=Release -G Ninja ../
         ninja javascript_engine
+    - name: Upload a Build Artifact
+      if: runner.os == 'macOS'
+      uses: actions/upload-artifact@v2
+      with:
+        # Artifact name
+        name: mac_plugin # optional
+        # A file, directory or wildcard pattern that describes what to upload
+        path: build/script_engine.dylib
 # sh make_bundle.sh
       # $env:LIB = "C:\Program Files (x86)\Windows Kits\10\Lib\10.0.17763.1\um\x64;C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\VC\Tools\MSVC\14.16.27023\lib\onecore\x64;C:\Program Files (x86)\Windows Kits\10\Lib\10.0.17763.1\ucrt\x64"
       # cmake -DCMAKE_C_COMPILER="C:/Program Files/LLVM/bin/clang-cl.exe" -DCMAKE_CXX_COMPILER="C:/Program Files/LLVM/bin/clang-cl.exe" -DCMAKE_BUILD_TYPE:STRING=Release -G Ninja ./ "-DCMAKE_LINKER:FILEPATH=C:/Program Files (x86)/Microsoft Visual Studio/2017/Community/VC/Tools/MSVC/14.16.27023/bin/Hostx64/x64/link.exe" "-DCMAKE_MT:FILEPATH=C:/Program Files (x86)/Windows Kits/10/bin/10.0.17763.1/x64/mt.exe" "-DCMAKE_RC_COMPILER:FILEPATH=C:/Program Files (x86)/Windows Kits/10/bin/10.0.17763.1/x64/rc.exe" "-DCMAKE_CXX_STANDARD_LIBRARIES:STRING=kernel32.lib user32.lib gdi32.lib winspool.lib shell32.lib ole32.lib oleaut32.lib uuid.lib comdlg32.lib advapi32.lib" "-DCMAKE_EXPORT_COMPILE_COMMANDS:BOOL=TRUE"
