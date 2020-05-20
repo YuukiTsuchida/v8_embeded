@@ -51,7 +51,7 @@ jobs:
         # Artifact name
         name: win_dll # optional
         # A file, directory or wildcard pattern that describes what to upload
-        path: build/script_engine.dll
+        path: script_engine.dll
 
     - name: Install (mac)
       if: runner.os == 'macOS'
